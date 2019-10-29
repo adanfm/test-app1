@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+
+  php:
+    build:
+      context: devops/php
+    container_name: php-service
+    ports:
+      - "9400:9000"
+    volumes:
+      - .:/app
+      - ./devops/php/assets/php-development.ini:/usr/local/etc/php/conf.d/additional.ini
+    networks:
+      - app-networks
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "UB83AF4@%FKxH7"
+      POSTGRES_DB: "app1"
+    networks:
+      - app-networks
+
+networks:
+  app-networks:
+    driver: bridge
