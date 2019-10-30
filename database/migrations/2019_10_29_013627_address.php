@@ -13,7 +13,17 @@ class Address extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('address', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('street');
+            $table->string('number');
+            $table->string('neighborhood');
+            $table->string('complement');
+            $table->string('state');
+            $table->string('city');
+            $table->string('zip_code');
+            $table->enum('type', ['main', 'billing']);
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class Address extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('address');
     }
 }

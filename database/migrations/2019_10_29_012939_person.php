@@ -13,7 +13,18 @@ class Person extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('person', function(Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('first_name', 80);
+            $table->string('middle_name', 80)->nullable();
+            $table->string('last_name', 80);
+            $table->string('document', 11)->unique();
+            $table->date('birthday');
+            $table->string('mother_name');
+            $table->string('father_name');
+            $table->timestamps();
+            $table->boolean('is_active');
+        });
     }
 
     /**
@@ -23,6 +34,6 @@ class Person extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('person');
     }
 }

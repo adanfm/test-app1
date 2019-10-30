@@ -13,7 +13,14 @@ class PersonHasAddress extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('person_has_address', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('person_id');
+            $table->unsignedBigInteger('address_id');
+
+            $table->foreign('person_id')->references('id')->on('person');
+            $table->foreign('address_id')->references('id')->on('address');
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class PersonHasAddress extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('person_has_address');
     }
 }
